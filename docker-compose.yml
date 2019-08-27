@@ -1,0 +1,46 @@
+version: '3'
+services:
+  socketio_app:
+    restart: always
+    container_name: socketio_app
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "9980:8080"
+    volumes:
+      - ./:/app
+      - /app/vendor/
+    networks:
+      - app-network
+
+  #MySQL Service
+  socketio_db:
+    container_name: socketio_db
+    image: mariadb
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/mysql
+    environment :
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=app
+      - MYSQL_ROOT_HOST=%
+    healthcheck:
+      test:  mysql --user=root --password=root
+    networks:
+      - app-network
+
+  socketio_pma:
+    container_name: socketio_pma
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "9981:80"
+    links:
+      - socketio_db:db
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
