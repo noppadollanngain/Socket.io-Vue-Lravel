@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/fatch/message', 'MessageController@fatch')->name('api.fatch.message');
+Route::post('/create/message', 'MessageController@create')->name('api.create.message');
