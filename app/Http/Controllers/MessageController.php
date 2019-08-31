@@ -7,7 +7,7 @@ use App\Message;
 
 class MessageController extends Controller
 {
-    public function fatch() {
+    public function fetch() {
         return Message::all();
     }
     public function create(Request $request) {

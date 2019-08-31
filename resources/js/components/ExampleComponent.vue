@@ -43,9 +43,9 @@ export default {
         this.text = '';
       });
     },
-    fatchMessage() {
+    fetchMessage() {
       axios({
-        url: '/api/fatch/message',
+        url: '/api/fetch/message',
         method: 'get',
       }).then(res => {
         this.message = res.data
@@ -53,12 +53,12 @@ export default {
     }
   },
   created() {
-    this.fatchMessage();
+    this.fetchMessage();
   },
   mounted() {
     let vm = this;
     this.$root.socket.on('chatMessage', function () {
-      vm.fatchMessage();
+      vm.fetchMessage();
     })
   }
 }

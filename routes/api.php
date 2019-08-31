@@ -17,5 +17,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/fatch/message', 'MessageController@fatch')->name('api.fatch.message');
+Route::get('/fetch/message', 'MessageController@fetch')->name('api.fetch.message');
 Route::post('/create/message', 'MessageController@create')->name('api.create.message');
